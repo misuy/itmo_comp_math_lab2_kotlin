@@ -11,9 +11,7 @@ import java.util.Scanner
 import kotlin.properties.Delegates
 
 
-abstract class Reader(val inputStream: InputStream, val outputStream: PrintStream, val message: String) {
-    val scanner: Scanner = Scanner(inputStream);
-
+abstract class Reader(val scanner: Scanner, val outputStream: PrintStream, val message: String) {
     fun printMessage() {
         outputStream.print(message);
     }
@@ -22,13 +20,13 @@ abstract class Reader(val inputStream: InputStream, val outputStream: PrintStrea
     abstract fun read();
 }
 
-class NothingReader(inputStream: InputStream, outputStream: PrintStream, message: String) : Reader(inputStream, outputStream, message) {
+class NothingReader(scanner: Scanner, outputStream: PrintStream, message: String) : Reader(scanner, outputStream, message) {
     override fun read() {
         this.printMessage();
     }
 }
 
-class IntReader(inputStream: InputStream, outputStream: PrintStream, message: String) : Reader(inputStream, outputStream, message) {
+class IntReader(scanner: Scanner, outputStream: PrintStream, message: String) : Reader(scanner, outputStream, message) {
     var int by Delegates.notNull<Int>();
 
     override fun read() {
@@ -37,7 +35,7 @@ class IntReader(inputStream: InputStream, outputStream: PrintStream, message: St
     }
 }
 
-class DoubleReader(inputStream: InputStream, outputStream: PrintStream, message: String) : Reader(inputStream, outputStream, message) {
+class DoubleReader(scanner: Scanner, outputStream: PrintStream, message: String) : Reader(scanner, outputStream, message) {
     var double by Delegates.notNull<Double>();
 
     override fun read() {
@@ -46,7 +44,7 @@ class DoubleReader(inputStream: InputStream, outputStream: PrintStream, message:
     }
 }
 
-class SegmentReader(inputStream: InputStream, outputStream: PrintStream, message: String) : Reader(inputStream, outputStream, message) {
+class SegmentReader(scanner: Scanner, outputStream: PrintStream, message: String) : Reader(scanner, outputStream, message) {
     lateinit var segment: Segment;
 
     override fun read() {
@@ -58,7 +56,7 @@ class SegmentReader(inputStream: InputStream, outputStream: PrintStream, message
 
 }
 
-class FunctionReader(inputStream: InputStream, outputStream: PrintStream, message: String) : Reader(inputStream, outputStream, message) {
+class FunctionReader(scanner: Scanner, outputStream: PrintStream, message: String) : Reader(scanner, outputStream, message) {
     lateinit var function: Function;
 
     override fun read() {
@@ -69,7 +67,7 @@ class FunctionReader(inputStream: InputStream, outputStream: PrintStream, messag
     }
 }
 
-class EquationsMethodReader(inputStream: InputStream, outputStream: PrintStream, message: String) : Reader(inputStream, outputStream, message) {
+class EquationsMethodReader(scanner: Scanner, outputStream: PrintStream, message: String) : Reader(scanner, outputStream, message) {
     lateinit var method: EquationSolvingMethod;
 
     override fun read() {
@@ -83,7 +81,7 @@ class EquationsMethodReader(inputStream: InputStream, outputStream: PrintStream,
     }
 }
 
-class SystemsOfEquationsMethodReader(inputStream: InputStream, outputStream: PrintStream, message: String) : Reader(inputStream, outputStream, message) {
+class SystemsOfEquationsMethodReader(scanner: Scanner, outputStream: PrintStream, message: String) : Reader(scanner, outputStream, message) {
     lateinit var method: SystemOfTwoEquationsSolvingMethod;
 
     override fun read() {
